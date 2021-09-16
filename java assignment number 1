@@ -1,0 +1,96 @@
+import java.util.Scanner;
+public class Complex{
+    public static void main(String[] args){
+        int choice;
+        float n1,n2;
+        Operation calc = new Operation();
+        
+        Scanner S = new Scanner(System.in);
+        System.out.println("Enter first number(real) :");
+        n1 = S.nextInt();
+        System.out.println("Enter first number(imaginary) :");
+        n2 = S.nextInt();
+        Operation obj1 = new Operation(n1,n2);
+        
+        System.out.println("Enter second number(real) :");
+        n1 = S.nextInt();
+        System.out.println("Enter second number(imaginary) :");
+        n2 = S.nextInt();
+        Operation obj2 = new Operation(n1,n2);
+        
+        System.out.println("1.Addition\n2.Subtraction\n3.Multiplication\n4.Division\n5.Conjugate\n6.exit");
+        System.out.println("Enter your choice(1-6) :");
+        choice = S.nextInt();
+        S.close();
+        
+        switch(choice){
+            case 1: 
+            calc.add(obj1,obj2);
+            break;
+            case 2:
+            calc.sub(obj1,obj2);
+            break;
+            case 3:
+            calc.mult(obj1,obj2);
+            break;
+            case 4:
+            calc.div(obj1,obj2);
+            break;
+            case 5:
+            calc.conj(obj1,obj2);
+            break;
+            case 6:
+            break;
+            default:
+            System.out.println("Please enter the valid choice");
+            break;
+        }
+        
+    }
+}
+class Operation {
+    float real,img;
+    Operation(){
+        real=0;
+        img=0;
+    }
+    Operation(float n1, float n2){
+        real=n1;
+        img=n2;
+    }
+    
+    public void add(Operation obj1, Operation obj2){
+        real = obj1.real+obj2.real;
+        img = obj1.img+obj2.img;
+        System.out.println("Addidtion :"+real+"+"+img+"i");
+    }
+    public void sub(Operation obj1, Operation obj2){
+        real = obj1.real-obj2.real;
+        img = obj1.img-obj2.img;
+        System.out.println("Subtraction :"+real+"+"+img+"i");
+    }
+    public void mult(Operation obj1, Operation obj2){
+        real = obj1.real*obj2.real-obj1.img*obj2.img;
+        img = obj1.real*obj2.img+obj1.img*obj2.real;
+        System.out.println("Multiplication :"+real+"+"+img+"i");
+    }
+    public void div(Operation obj1, Operation obj2){
+        real = (obj1.real*obj2.real+obj1.img*obj2.img)/(obj2.real*obj2.real+obj2.img*obj2.img);
+        img = (obj1.img*obj2.real-obj1.real*obj2.img)/(obj2.real*obj2.real+obj2.img*obj2.img);
+        System.out.println("Division :"+real+"+"+img+"i");
+    }
+    public void conj(Operation obj1, Operation obj2){
+        if(obj1.img<0)
+         System.out.println("Conjugate of first number is :"+obj1.real+"+"+(-obj1.img)+"i");
+        else
+        System.out.println("Conjugate of first number is :"+obj1.real+"-"+obj1.img+"i");
+        if(obj2.img<0)
+        System.out.println("Conjugate of second number is :"+obj2.real+"+"+(-obj2.img)+"i");
+        else
+        System.out.println("Conjugate of second number is :"+obj2.real+"-"+obj2.img+"i");
+        
+        
+    }
+        
+    
+}
